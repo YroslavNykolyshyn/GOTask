@@ -8,29 +8,36 @@ import (
 
 func main() {
 	input := "1 9 3 4 -5"
-	var myInt []int
-	min, max := findMinAndMax(myInt)
+	var res string
+	var min int32
+	var max int32
 	myStrSlice := strings.Split(input, " ")
-	for _, i := range myStrSlice {
-		myInt, _ := strconv.Atoi(i)
-		fmt.Println(myInt)
-	}
-	fmt.Println(myInt)
 
-	fmt.Println("Min: ", min)
-	fmt.Println("Max: ", max)
-}
+	for i := 0; i < len(myStrSlice); i++ {
 
-func findMinAndMax(myInt []int) (min int, max int) {
-	min = myInt[0]
-	max = myInt[0]
-	for _, value := range myInt {
-		if value < min {
-			min = value
+		IntVal, _ := strconv.Atoi(myStrSlice[i])
+
+		if i == 0 {
+			max = int32(IntVal)
+			min = int32(IntVal)
 		}
-		if value > max {
-			max = value
+
+		if int32(IntVal) > max {
+			max = int32(IntVal)
 		}
+
+		if int32(IntVal) < min {
+			min = int32(IntVal)
+		}
+
 	}
-	return min, max
+
+	if max != min {
+		res = fmt.Sprintf("Max: %d Min: %d", max, min)
+	} else {
+		res = fmt.Sprintf("%d", max)
+	}
+
+	fmt.Println(res)
+
 }
